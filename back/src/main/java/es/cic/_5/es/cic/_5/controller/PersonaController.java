@@ -19,12 +19,12 @@ import es.cic._5.es.cic._5.service.PersonaService;
 @RequestMapping("/api/personas")
 public class PersonaController {
 
-    // Inyección del servicio de Persona
+
     @Autowired
     private PersonaService personaService;
 
     // Métodos para manejar las solicitudes HTTP
-    // (Crear, Leer, Actualizar, Eliminar)
+    // CRUD: Create, Read, Update, Delete
 
     @GetMapping
     public List<Persona> getAllPersonas(){
@@ -32,7 +32,7 @@ public class PersonaController {
     }
 
     @GetMapping("/{id}")
-    public Persona getPersonaById(Long id){
+    public Persona getPersonaById(@PathVariable Long id){
         return personaService.getPersona(id);
     }
 
