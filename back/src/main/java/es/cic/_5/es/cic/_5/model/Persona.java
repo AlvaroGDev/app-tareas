@@ -23,7 +23,7 @@ public class Persona {
 
     private String email;
 
-    private enum Departamento {
+    public static enum Departamento {
         RRHH, IT, MARKETING, VENTAS
     }
 

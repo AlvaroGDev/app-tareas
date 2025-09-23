@@ -17,11 +17,11 @@ public class Tarea {
 
     private String descripcion;
 
-    private enum Estado {
+    public static enum Estado {
         PENDIENTE, EN_PROGRESO, COMPLETADA
     }
 
-    private enum Prioridad {
+    public static enum Prioridad {
         BAJA, MEDIA, ALTA
     }
     private Estado estado;
