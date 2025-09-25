@@ -1,0 +1,6 @@
+<p>pagina-inicio works!</p>
+<div *ngFor="let persona of personas">
+  <p>{{ persona.nombre }} {{ persona.apellidos }}</p>
+  <div *ngFor="let tarea of persona.tareas">
+    <p>- {{ tarea.descripcion }} (Completada: {{ tarea.estado }})</p>
+</div>

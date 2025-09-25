@@ -72,10 +72,18 @@ public class Persona {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public List<Tarea> getTareas() {
+        return tareas;
+    }
+    public void setTareas(List<Tarea> tareas) {
+        this.tareas = tareas;
+    }
+
     @Override
     public String toString() {
         return "Persona [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", departamento="
-                + departamento + ", email=" + email + "]";
+                + departamento + ", email=" + email + ", tareas=" + tareas + "]";
     }
 
    // hashcode y equals 

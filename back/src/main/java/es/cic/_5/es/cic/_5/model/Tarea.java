@@ -1,5 +1,7 @@
 package es.cic._5.es.cic._5.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +30,7 @@ public class Tarea {
     private Prioridad prioridad;
 
     @ManyToOne
+    @JsonIgnore
     private Persona personaAsignada;
     // Constructores
 
