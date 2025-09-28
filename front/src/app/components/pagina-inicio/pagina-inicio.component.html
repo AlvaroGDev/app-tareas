@@ -1,6 +1,48 @@
-<p>pagina-inicio works!</p>
-<div *ngFor="let persona of personas">
-  <p>{{ persona.nombre }} {{ persona.apellidos }}</p>
-  <div *ngFor="let tarea of persona.tareas">
-    <p>- {{ tarea.descripcion }} (Completada: {{ tarea.estado }})</p>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="p-3 border bg-light">
+        <h4 class="text-center">Tareas sin asignación</h4>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let tarea of tareasSinAsignacion()">
+            {{ tarea.nombre }}<br>
+            <small>{{ tarea.descripcion }} - {{ tarea.estado }} - {{ tarea.prioridad }}</small>
+            <div class="mt-2" *ngIf="tarea.id !== undefined && tarea.id !== null">
+              <select class="form-select" [(ngModel)]="personaSeleccionada[tarea.id]">
+                <option [ngValue]="null">-- Seleccionar persona --</option>
+                <option *ngFor="let persona of personas" [ngValue]="persona">{{ persona.nombre }}</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-sm mt-2" (click)="asignarTarea(tarea)" [disabled]="!tarea.id">Asignar</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="p-3 border bg-light">
+        <h4 class="text-center">Tareas pendientes</h4>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let tarea of tareasPendientes()">
+            {{ tarea.nombre }}<br>
+            <small>{{ tarea.descripcion }} - {{ tarea.prioridad }}
+              <span *ngIf="tarea.personaAsignada">- Asignada a: {{ tarea.personaAsignada.nombre }}</span>
+            </small>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="p-3 border bg-light text-center">
+        <h4 class="text-center">Tareas completadas</h4>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let tarea of tareasCompletadas()">
+            {{ tarea.nombre }}<br>
+            <small>{{ tarea.descripcion }} - {{ tarea.prioridad }}
+              <span *ngIf="tarea.personaAsignada">- Asignada a: {{ tarea.personaAsignada.nombre }}</span>
+            </small>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

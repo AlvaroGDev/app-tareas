@@ -1,6 +1,8 @@
 package es.cic._5.es.cic._5.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +32,11 @@ public class Tarea {
     private Prioridad prioridad;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties("tareas")
     private Persona personaAsignada;
+    // El jsonignoreproperties indica que no se debe serializar el atributo tareas de personaAsignada,
+    // evitando así la referencia circular infinita al serializar una tarea que tiene una persona asignada
+
     // Constructores
 
     public Tarea() {
