@@ -1,0 +1,31 @@
+<div class="container mt-4">
+	<h2>Añadir nueva tarea</h2>
+	<form #tareaForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+		<div class="mb-3">
+			<label for="nombre" class="form-label">Nombre</label>
+			<input type="text" id="nombre" class="form-control" name="nombre" [(ngModel)]="tarea.nombre" required>
+		</div>
+		<div class="mb-3">
+			<label for="descripcion" class="form-label">Descripción</label>
+			<textarea id="descripcion" class="form-control" name="descripcion" [(ngModel)]="tarea.descripcion" required></textarea>
+		</div>
+		<div class="mb-3">
+			<label for="estado" class="form-label">Estado</label>
+			<select id="estado" class="form-select" name="estado" [(ngModel)]="tarea.estado" required>
+				<option value="PENDIENTE">Pendiente</option>
+				<option value="EN_PROGRESO">En progreso</option>
+				<option value="COMPLETADA">Completada</option>
+			</select>
+		</div>
+		<div class="mb-3">
+			<label for="prioridad" class="form-label">Prioridad</label>
+			<select id="prioridad" class="form-select" name="prioridad" [(ngModel)]="tarea.prioridad" required>
+				<option value="BAJA">Baja</option>
+				<option value="MEDIA">Media</option>
+				<option value="ALTA">Alta</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary" [disabled]="!tareaForm.form.valid">Guardar tarea</button>
+	</form>
+</div>
+

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
 
 import es.cic._5.es.cic._5.model.Tarea;
 import es.cic._5.es.cic._5.service.TareaService;
@@ -32,7 +33,7 @@ public class TareaController {
         return tareaService.getTarea(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Tarea createTarea(@RequestBody Tarea tarea) {
         return tareaService.createTarea(tarea);
     }

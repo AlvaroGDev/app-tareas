@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-nav-bar',
+  selector: 'app-formulario-personas',
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css'
+  templateUrl: './formulario-personas.component.html',
+  styleUrl: './formulario-personas.component.css'
 })
-export class NavBarComponent {
+export class FormularioPersonasComponent {
 
 }

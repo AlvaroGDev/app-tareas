@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tarea } from '../models/tarea.model';
 
@@ -16,11 +16,14 @@ export class TareaServiceService {
   }
 
   createTarea(tarea: Tarea) {
-    return this.httpClient.post<Tarea>(this.apiUrl, tarea);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    
+    return this.httpClient.post<Tarea>(this.apiUrl, tarea, { headers });
   }
 
   updateTarea(tarea: Tarea) {
-    return this.httpClient.put<Tarea>(`${this.apiUrl}/${tarea.id}`, tarea);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpClient.put<Tarea>(`${this.apiUrl}/${tarea.id}`, tarea, { headers });
   }
 
   deleteTarea(id: number) {
