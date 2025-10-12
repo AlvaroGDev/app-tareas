@@ -3,7 +3,11 @@ package es.cic._5.es.cic._5.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import es.cic._5.es.cic._5.model.Enums.Estado;
+import es.cic._5.es.cic._5.model.Enums.Prioridad;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,18 +23,14 @@ public class Tarea {
     private String nombre;
 
     private String descripcion;
-
-    public static enum Estado {
-        PENDIENTE, EN_PROGRESO, COMPLETADA
-    }
-
-    public static enum Prioridad {
-        BAJA, MEDIA, ALTA
-    }
-    private Estado estado;
+    
+    @Enumerated(EnumType.STRING)
     private Prioridad prioridad;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
+
+    @ManyToOne(optional = true)
     @JsonIgnoreProperties("tareas")
     private Persona personaAsignada;
     // El jsonignoreproperties indica que no se debe serializar el atributo tareas de personaAsignada,
@@ -48,6 +48,14 @@ public class Tarea {
         this.prioridad = prioridad;
         this.personaAsignada = personaAsignada;
     }
+
+    public Tarea(String nombre, String descripcion, Estado estado, Prioridad prioridad) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.prioridad = prioridad;
+    }
+    
 
     public Long getId() {
         return id;

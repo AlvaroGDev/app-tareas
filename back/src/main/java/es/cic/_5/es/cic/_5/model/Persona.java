@@ -2,9 +2,11 @@ package es.cic._5.es.cic._5.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import es.cic._5.es.cic._5.model.Enums.Departamento;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,16 +23,13 @@ public class Persona {
 
     private String apellidos;
 
-    private Departamento departamento;
-
     private String email;
 
-    public static enum Departamento {
-        RRHH, IT, MARKETING, VENTAS
-    }
+   @Enumerated(EnumType.STRING)
+   private Departamento departamento;
 
     @OneToMany(mappedBy = "personaAsignada")
-    @JsonManagedReference
+    @JsonIgnoreProperties("personaAsignada")
     private List<Tarea> tareas;
 
     // Constructores
