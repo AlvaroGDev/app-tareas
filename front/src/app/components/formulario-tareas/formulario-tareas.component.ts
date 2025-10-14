@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Tarea } from '../../models/tarea.model';
-
 import { FormsModule } from '@angular/forms';
 import { TareaServiceService } from '../../services/tarea-service.service';
 
@@ -13,7 +12,8 @@ import { TareaServiceService } from '../../services/tarea-service.service';
   styleUrl: './formulario-tareas.component.css'
 })
 export class FormularioTareasComponent {
-
+  showToast = false;
+  
   constructor(private TareaService: TareaServiceService) { }
 
   tarea: Tarea = {
@@ -24,17 +24,23 @@ export class FormularioTareasComponent {
   };
 
   onSubmit() {
-    // Aquí puedes manejar el guardado de la tarea
-    this.TareaService.createTarea(this.tarea).subscribe(response => {
-      alert('Tarea guardada: ' + JSON.stringify(response));
+    this.TareaService.createTarea(this.tarea).subscribe({
+      next: (response) => {
+        // Mostrar el toast
+        this.showToast = true;
+        setTimeout(() => this.showToast = false, 3000); // Se oculta después de 3 segundos
+        
+        // Resetear el formulario
+        this.tarea = {
+          nombre: '',
+          descripcion: '',
+          estado: 'PENDIENTE',
+          prioridad: 'MEDIA'
+        };
+      },
+      error: (error) => {
+        console.error('Error al crear la tarea:', error);
+      }
     });
-
-    // Resetear el formulario si quieres
-    this.tarea = {
-      nombre: '',
-      descripcion: '',
-      estado: 'PENDIENTE',
-      prioridad: 'MEDIA'
-    };
   }
 }

@@ -25,7 +25,17 @@
 				<option value="ALTA">Alta</option>
 			</select>
 		</div>
-		<button type="submit" class="btn btn-primary" [disabled]="!tareaForm.form.valid">Guardar tarea</button>
-	</form>
+    <button type="submit" class="btn btn-primary" [disabled]="!tareaForm.form.valid">Guardar tarea</button>
+  </form>
 </div>
 
+<!-- Toast simple con animación -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast align-items-center text-bg-success border-0 fade" [class.show]="showToast" role="alert">
+    <div class="d-flex">
+      <div class="toast-body">
+        Tarea creada correctamente
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,87 @@
-<p>formulario-personas works!</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Añadir nueva persona</h4>
+        </div>
+        
+        <div class="card-body">
+          <!-- CAMBIO: [formGroup] y formControlName -->
+          <form [formGroup]="personaForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombre" class="form-label">Nombre *</label>
+                <input type="text" id="nombre" class="form-control" 
+                       formControlName="nombre">
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="apellidos" class="form-label">Apellidos *</label>
+                <input type="text" id="apellidos" class="form-control" 
+                       formControlName="apellidos">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="departamento" class="form-label">Departamento *</label>
+              <select id="departamento" class="form-select" 
+                      formControlName="departamento">
+                <option value="">Selecciona un departamento</option>
+                <option value="IT">IT</option>
+                <option value="RRHH">RRHH</option>
+                <option value="MARKETING">Marketing</option>
+                <option value="VENTAS">Ventas</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" id="email" class="form-control" 
+                     formControlName="email"
+                     [class.is-invalid]="personaForm.get('email')?.invalid && personaForm.get('email')?.touched">
+              <div class="form-text">Formato: usuario &#64; dominio.com</div>
+                <div class="invalid-feedback" *ngIf="personaForm.get('email')?.errors?.['required'] && personaForm.get('email')?.touched">
+    El email es obligatorio
+  </div>
+  <div class="invalid-feedback" *ngIf="personaForm.get('email')?.errors?.['pattern'] && personaForm.get('email')?.touched">
+    Formato de email inválido. Use: usuario&#64;dominio.com
+  </div>
+            </div>
+
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success" 
+                      [disabled]="personaForm.invalid">
+                Guardar persona
+              </button>
+              <button type="button" class="btn btn-secondary" 
+                      (click)="limpiarFormulario()">
+                Limpiar
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast (igual) -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
+  <div class="toast {{ toastType === 'success' ? 'bg-success' : 'bg-danger' }} text-white" 
+       [class.show]="showToast" role="alert">
+    <div class="toast-header {{ toastType === 'success' ? 'bg-success' : 'bg-danger' }} text-white">
+      <strong class="me-auto">
+        {{ toastType === 'success' ? '✅ Éxito' : '❌ Error' }}
+      </strong>
+      <button type="button" class="btn-close btn-close-white" 
+              (click)="showToast = false"></button>
+    </div>
+    <div class="toast-body">
+      {{ toastMessage }}
+    </div>
+  </div>
+</div>
