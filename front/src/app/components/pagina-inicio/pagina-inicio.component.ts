@@ -51,4 +51,9 @@ export class PaginaInicioComponent {
       this.tareaService.updateTarea(tarea).subscribe();
     }
   }
+
+  completarTarea(tarea: Tarea){
+    tarea.estado = 'COMPLETADA';
+    this.tareaService.updateTarea(tarea).subscribe();
+  }
 }

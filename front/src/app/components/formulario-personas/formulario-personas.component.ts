@@ -37,13 +37,7 @@ export class FormularioPersonasComponent {
   };
 
   limpiarFormulario() {
-this.personaForm.reset({
-  nombre: '',
-  apellidos: '',
-  departamento: 'IT',
-  email: '',
-  tareas: []
-});
+
   }
 
     mostrarToast(mensaje: string, tipo: 'success' | 'error') {

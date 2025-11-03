@@ -13,14 +13,22 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="nombre" class="form-label">Nombre *</label>
-                <input type="text" id="nombre" class="form-control" 
+                <input type="text" id="nombre" class="form-control"
+                       [class.is-invalid]="personaForm.get('nombre')?.invalid && personaForm.get('nombre')?.touched"
                        formControlName="nombre">
+                <div class="invalid-feedback" *ngIf="personaForm.get('nombre')?.errors?.['required'] && personaForm.get('nombre')?.touched">
+                  El nombre es obligatorio
+                </div>
               </div>
               
               <div class="col-md-6 mb-3">
                 <label for="apellidos" class="form-label">Apellidos *</label>
-                <input type="text" id="apellidos" class="form-control" 
+                <input type="text" id="apellidos" class="form-control"
+                       [class.is-invalid]="personaForm.get('apellidos')?.invalid && personaForm.get('apellidos')?.touched"
                        formControlName="apellidos">
+                <div class="invalid-feedback" *ngIf="personaForm.get('apellidos')?.errors?.['required'] && personaForm.get('apellidos')?.touched">
+                  El apellido es obligatorio
+                </div>
               </div>
             </div>
 
@@ -54,7 +62,7 @@
             <div class="d-flex gap-2">
               <button type="submit" class="btn btn-success" 
                       [disabled]="personaForm.invalid">
-                Guardar persona
+                Guardar
               </button>
               <button type="button" class="btn btn-secondary" 
                       (click)="limpiarFormulario()">

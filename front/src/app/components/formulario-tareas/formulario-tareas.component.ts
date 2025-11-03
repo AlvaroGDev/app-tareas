@@ -1,20 +1,28 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Tarea } from '../../models/tarea.model';
-import { FormsModule } from '@angular/forms';
 import { TareaServiceService } from '../../services/tarea-service.service';
 
 @Component({
   selector: 'app-formulario-tareas',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './formulario-tareas.component.html',
   styleUrl: './formulario-tareas.component.css'
 })
 export class FormularioTareasComponent {
   showToast = false;
+  tareaForm: FormGroup;
   
-  constructor(private TareaService: TareaServiceService) { }
+  constructor(private TareaService: TareaServiceService, private fb: FormBuilder) { 
+    this.tareaForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      estado: ['PENDIENTE', Validators.required],
+      prioridad: ['MEDIA', Validators.required]
+    });
+
+  }
 
   tarea: Tarea = {
     nombre: '',
@@ -24,11 +32,13 @@ export class FormularioTareasComponent {
   };
 
   onSubmit() {
-    this.TareaService.createTarea(this.tarea).subscribe({
-      next: (response) => {
-        // Mostrar el toast
-        this.showToast = true;
-        setTimeout(() => this.showToast = false, 3000); // Se oculta después de 3 segundos
+    if (this.tareaForm.valid) {
+      this.TareaService.createTarea(this.tareaForm.value).subscribe({
+        next: (response) => {
+          // Mostrar el toast
+          this.showToast = true;
+          setTimeout(() => this.showToast = false, 3000); // Se oculta después de 3 segundos
+          this.tareaForm.reset();
         
         // Resetear el formulario
         this.tarea = {
@@ -43,4 +53,5 @@ export class FormularioTareasComponent {
       }
     });
   }
+}
 }

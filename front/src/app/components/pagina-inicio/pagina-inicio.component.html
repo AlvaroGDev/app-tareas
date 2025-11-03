@@ -24,9 +24,12 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let tarea of tareasPendientes()">
             {{ tarea.nombre }}<br>
-            <small>{{ tarea.descripcion }} - {{ tarea.prioridad }}
-              <span *ngIf="tarea.personaAsignada">- Asignada a: {{ tarea.personaAsignada.nombre }}</span>
+            <small>{{ tarea.descripcion }} - {{ tarea.prioridad }}</small>
+            <small *ngIf="tarea.personaAsignada" class="d-block mt-1">
+              <span style="font-weight: bold;">{{ tarea.personaAsignada.nombre }}</span>
+              <button class="btn btn-success btn-sm d-block mt-2" (click)="completarTarea(tarea)">Completar</button>
             </small>
+            
           </li>
         </ul>
       </div>
